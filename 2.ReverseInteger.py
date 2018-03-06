@@ -34,5 +34,17 @@ class Solution:
             return -1 * a
         return a
 
-
-        # 回顾：应该转化成str类型，再使用切片，后转化为int类型
+ # 回顾：应该转化成str类型，再使用切片，后转化为int类型
+ # 切片大法：(cool!)
+ class Solution:
+    def reverse(self,x):
+        sign = 1
+        if x > 0:
+            pass
+        else:
+            sign = -1
+        y = int(str(abs(x))[::-1])
+        if y > 2 ** 31 - 1:
+            return 0
+        else:
+            return sign * y
