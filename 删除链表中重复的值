@@ -4,10 +4,38 @@
 在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 
 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
 
-//新建一个节点，防止头结点要被删除
+//第一种：
  设置两个指针，相当于两层循环，第一层作为参考，第二层如果遇到和第一层一样的值，就删除。
- 否则继续向后查找。
+ 否则继续向后查找。这种方法，复杂度比较高；
 */
+
+public class DleteDuplication {
+	
+	public static ListNode deleteDuplication(ListNode head)	{
+		
+		ListNode p = head;
+		if(p == null || p.next == null) {
+			return head;
+		}
+		while(p!=null) {
+			ListNode tmp = p;
+			while(tmp.next!=null) {
+				if(p.data == tmp.next.data) {
+					
+					tmp.next = tmp.next.next;
+				}
+				else
+					tmp = tmp.next;
+				}
+			p = p.next;	
+			}
+		return head;
+	}
+	
+//第二种：
+ 新建一个节点，防止头结点要被删除
+*/
+
 public class Solution {
     public ListNode deleteDuplication(ListNode pHead)
     {
