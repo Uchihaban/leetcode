@@ -1,0 +1,65 @@
+
+//删除链表
+//只给定了要删除的节点，没有前驱或者后继，所以只能利用node后的一个节点往前移动，然后删node后面的那个节点。
+class ListNode {
+    int data;
+    ListNode next;
+    public ListNode(int x){ 
+  	  this.data = x; 
+  	  }
+    
+    public int getData(){
+  	  return data;
+  	  
+    }
+    public void setData(int data) {
+  	  this.data=data;
+    }
+    
+    public ListNode getNext() {
+  	  return next;
+  	  
+    }
+    
+    public void setNext(ListNode next) {
+  	  this.next = next;
+    }
+    
+}
+
+public class List{
+	
+    public static void deleteList(ListNode node) {
+    	node.data = node.next.data;//将后方节点的值复制给node，再将后方节点删除；
+    	node.next = node.next.next;
+    	
+    }
+    	
+    public static void main(String[] args) {
+    	
+    	ListNode head =new ListNode(0);//新建链表；
+    	ListNode node1 =new ListNode(4);
+    	ListNode node2 =new ListNode(5);
+    	ListNode node3 =new ListNode(6);
+   
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	
+    	ListNode h = head;
+    	while(h!=null) {
+    		System.out.print(h.getData()+"->");//打印原始链表；
+    		h=h.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+    	
+    	deleteList(node2);
+    	
+    	while(head!=null) {
+    		System.out.print(head.getData()+"->");//打印当前链表；
+    		head=head.getNext();
+    	}
+    	
+    	}
+    	
+}
