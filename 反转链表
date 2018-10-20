@@ -1,7 +1,76 @@
-反转一个单链表。
+//反转链表
+class ListNode {
+      int data;
+      ListNode next;
+      public ListNode(int x){ 
+    	  this.data = x; 
+    	  }
+      
+      public int getData(){
+    	  return data;
+    	  
+      }
+      public void setData(int data) {
+    	  this.data=data;
+      }
+      
+      public ListNode getNext() {
+    	  return next;
+    	  
+      }
+      
+      public void setNext(ListNode next) {
+    	  this.next = next;
+      }
+      
+}
 
-示例:
-
-输入: 1->2->3->4->5->NULL
-输出: 5->4->3->2->1->NULL
-
+public class ReverseList{
+	
+    public static ListNode reverseList(ListNode head) {
+    	
+    	ListNode p = head; 
+    	ListNode newH = null;
+    	
+    	if(head==null || head.next==null) {
+    		return head;
+    	}
+    	
+    	while(p!=null) {
+    		ListNode tmp = p.next;//保存p后面节点的地址，以防丢失；
+    		p.next = newH;
+        newH = p;//将newH变成新链表的表头；
+        p = tmp;//P=tmp就可以取回原链表的数据，循环操作；
+    	}
+		return newH;
+        
+    }
+    
+    public static void main(String[] args) {
+    	
+    	ListNode head =new ListNode(0);
+    	ListNode node1 =new ListNode(4);
+    	ListNode node2 =new ListNode(5);
+    	ListNode node3 =new ListNode(6);
+   
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	
+    	ListNode h = head;
+    	while(h!=null) {
+    		System.out.print(h.getData()+"->");
+    		h=h.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+    	
+    	head = reverseList(head);
+    	
+    	while(head!=null) {
+    		System.out.print(head.getData()+"->");
+    		head=head.getNext();
+    	}
+    	
+    	}
+    	
+}
