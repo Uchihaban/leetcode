@@ -1,0 +1,78 @@
+//合并链表：将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+//示例：
+//输入：1->2->4, 1->3->4
+//输出：1->1->2->3->4->4
+
+
+//新建一个新的链表头节点为newH，再将l1.l2两个链表头进行对比，后面采用递归函数的方法；
+
+public class MergeTwoLists {
+	public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		
+		if(l1==null)
+			return l2;
+		if(l2==null)
+			return l1;
+		
+		
+		ListNode p1 = l1;
+		ListNode p2 = l2;
+		
+		ListNode newH = null;
+
+
+		if(p1.data>=p2.data) {
+			newH=p2;
+			newH.next=mergeTwoLists(p1,p2.next);
+			}
+		else {
+			newH=p1;
+		    newH.next=mergeTwoLists(p1.next,p2);
+			}
+		return newH;
+	}
+	
+	  public static void main(String[] args) {
+	    	
+	    	ListNode head1 =new ListNode(0);
+	    	ListNode node1 =new ListNode(4);
+	    	ListNode node2 =new ListNode(5);
+	    	ListNode node3 =new ListNode(6);
+	   
+	    	
+	    	ListNode head2 =new ListNode(0);
+	    	ListNode node4 =new ListNode(3);
+	    	ListNode node5 =new ListNode(3);
+	    	ListNode node6 =new ListNode(5);
+	    	
+	    	head1.setNext(node1);
+	    	node1.setNext(node2);
+	    	node2.setNext(node3);
+	    	
+	    	head2.setNext(node4);
+	    	node4.setNext(node5);
+	    	node5.setNext(node6);
+	    	
+	    	ListNode l1 = head1;
+	    	while(l1!=null) {
+	    		System.out.print(l1.getData()+"->");
+	    		l1=l1.getNext();
+	    	}
+	    	System.out.print("\n-----------------------\n");
+	    	
+	    	ListNode l2 = head2;
+	    	while(l2!=null) {
+	    		System.out.print(l2.getData()+"->");
+	    		l2=l2.getNext();
+	    	}
+	    	System.out.print("\n-----------------------\n");
+	    	
+	    	ListNode head = mergeTwoLists(head1,head2);
+	    	
+	    	while(head!=null) {
+	    		System.out.print(head.getData()+"->");
+	    		head=head.getNext();
+	    	}
+	  }
+}
