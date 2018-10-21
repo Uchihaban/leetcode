@@ -1,0 +1,57 @@
+//两个链表相交的点
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    
+      if(headA==null || headB==null) {
+        return null;
+        }//如果链表为空，返回null
+    	
+    	ListNode l1 = headA;
+    	ListNode l2 = headB;
+    	int i=1,j=1;
+    	
+    	while(l1.next!=null) {
+    		l1 = l1.next;
+    		i++;
+    	}//计算链表1的长度
+    	while(l2.next!=null) {
+    		l2 = l2.next;
+    		j++;
+    	}//计算链表2的长度
+    	
+    	if(l1!=l2) {
+    		return null;
+    	}//链表1和链表2的尾结点，则肯定不相交
+    	
+    	ListNode h1 = headA;
+    	ListNode h2 = headB;
+    	
+    	if(i>=j) {
+    		for(int n=0;n<i-j;n++) {
+    			h1=h1.next;
+    		}//链表1比链表2长，则转向链表1的第i-j个结点；
+    	}
+    	else {
+    		for(int n=0;n<j-i;n++) {
+    			h2=h2.next;
+    		}//链表2比链表1长，则转向链表2的第j-i个结点；
+    	}
+    		
+    		while(h1!=h2) {
+    			h1=h1.next;
+    			h2=h2.next;
+    		}//判断是否相交；
+    		return h1;
+    	}
+}
