@@ -1,0 +1,61 @@
+/*链表的中间节点：
+ * 给定一个带有头结点 head 的非空单链表，返回链表的中间结点。
+ * 如果有两个中间结点，则返回第二个中间结点。
+
+方法1:先遍历链表，得到链表的长度，然后计算所求点的位置；
+方法2:使用两个指针，指针1每次走一步，指针2每次走两步，当指针2到达终点，则指针1指向的则为中间节点。
+*/
+class MiddleNode{
+	
+    public static ListNode middleNode(ListNode head) {
+    	
+    	ListNode p = head;
+    	ListNode q = head;
+    	int i = 0;
+    	int n;
+    	
+    	while(p.next!=null) {
+    		p = p.next;
+    		i++;
+    	}
+    	
+    	if(i%2==0) 
+    		n = i/2;
+    	else 
+    		n = i/2 + 1;
+    	
+    	while(q.next!=null && n != 0) {
+    		q = q.next;
+    		n--;
+    		
+    		}
+    	return q;
+    		
+    	}
+
+    
+    public static void main(String[] args) {
+    	
+    	ListNode head = new ListNode(0);
+    	ListNode node1 = new ListNode(1);
+    	ListNode node2 = new ListNode(3);
+    	ListNode node3 = new ListNode(4);
+    	
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	
+    	ListNode h = head;
+    	while(h!=null) {
+    		System.out.print(h.getData()+"->");
+    		h=h.getNext();
+    	}
+    	
+    	System.out.println("\n-----------------------\n");
+    	
+    	head = middleNode(head);
+    	
+    	System.out.print(head.getData());
+    	
+    }
+}
