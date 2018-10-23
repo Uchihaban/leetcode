@@ -1,0 +1,77 @@
+package leetcode;
+/*请判断一个链表是否为回文链表。
+
+示例 1:
+
+输入: 1->2
+输出: false
+示例 2:
+
+输入: 1->2->2->1
+输出: true
+*/
+
+class IsPalindrome{
+    public static boolean isPalindrome(ListNode head) {
+		
+    	
+    	if(head == null|| head.next == null) return true;
+    	
+    	ListNode p = head;
+    	int i = 0;
+    	while(p != null) {
+    		p=p.next;
+    		i++;
+    	}//计算链表的长度；
+    	
+    	
+    	ListNode q = head;
+    	ListNode newh = null;
+    	for(int j=0;j<i/2;j++) {
+    		ListNode tmp = q.next;
+    		q.next = newh;
+    		newh = q;
+    		q = tmp;
+    	}//将链表前一半反转；
+    	
+    	if(i%2!=0) {
+    		q=q.next;
+    	}//如果链表长度是奇数，直接跳过中间的点；
+    	
+		while(q != null && newh != null) {
+    		if(q.data!=newh.data) 
+    			return false;
+    		else
+    			q = q.next;
+		        newh = newh.next;
+    	}
+    	return true;
+    }//判断前半部分和后半部分是否相等；
+    
+    public static void main(String[] args) {
+    	
+
+    	ListNode head =new ListNode(0);
+    	ListNode node1 =new ListNode(1);
+    	ListNode node2 =new ListNode(2);
+    	ListNode node3 =new ListNode(1);
+    	ListNode node4 =new ListNode(0);
+    	
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	node3.setNext(node4);
+    
+    	ListNode l1 = head;
+    	while(l1!=null) {
+    		System.out.print(l1.getData()+"->");
+    		l1=l1.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+	
+    	boolean f = isPalindrome(head);
+    
+    	System.out.println(f);
+  }
+    
+}
