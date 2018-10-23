@@ -1,0 +1,91 @@
+package leetcode;
+
+//给定一个链表，判断链表中是否有环。
+/*
+ * 判断是否有环（链表头指针为head）
+
+对于这个问题我们可以采用“快慢指针”的方法。就是有两个指针fast和slow，开始的时候两个指针都指向链表头head，然后在每一步
+
+操作中slow向前走一步即：slow = slow->next，而fast每一步向前两步即：fast = fast->next->next。
+
+由于fast要比slow移动的快，如果有环，fast一定会先进入环，而slow后进入环。当两个指针都进入环之后，经过一定步的操作之后
+
+二者一定能够在环上相遇，并且此时slow还没有绕环一圈，也就是说一定是在slow走完第一圈之前相遇。
+ */
+ 
+ 
+//   第一种解法	  	  
+public class HasCycle {
+    public static boolean hasCycle(ListNode head) {
+    	
+    	if(head == null || head.next == null) {
+    		return false;
+    	}
+    	
+    	ListNode p = head;
+    	ListNode q = head;
+    	
+    	while(p!=null && q.next!=null) {
+    		p = p.next;
+    	    q = q.next.next;
+    	    if(q == null)
+				return false;
+			//为了防止p2.data出现空指针异常，需要对p2进行判断
+			int val1 = p.data;
+			int val2 = q.data;
+			if(p==q&&val1 == val2)
+				return true;
+    	}
+    	return false;
+    	
+    	
+    	
+    	
+//   第二种解法	  	  
+//    Node p1 = head;    //定义一个引用指向头结点
+//		Node p2 = head;    //定义另一个引用指向头结点
+//		
+//		/**
+//		 * 因为引用p2要比p1走的快，所以要用它作为循环的结束标志，为了防止当链表中个数为
+//		 * 偶数时出现p2.next=null空指针异常，这时可以在循环中进行一下判断，如果这种情况
+//		 * 出现一定是无环的。
+//		 */
+//		while(p2 != null && p2.next != null){  
+//			p1 = p1.next;
+//			p2 = p2.next.next;
+//			if(p2 == null)
+//				return false;
+//			//为了防止p2.val出现空指针异常，需要对p2进行判断
+//			int val1 = p1.val;
+//			int val2 = p2.val;
+//			if(val1 == val2)
+//				return true;
+//		}
+//		return false;
+//
+
+
+    
+    }
+ public static void main(String[] args) {
+    	
+
+	 ListNode head = new ListNode(1);
+     ListNode listNode2 = new ListNode(2);
+    
+     head.setNext(listNode2);
+  
+     
+    
+    	ListNode l1 = head;
+    	while(l1!=null) {
+    		System.out.print(l1.getData()+"->");
+    		l1=l1.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+	
+    	boolean f = hasCycle(head);
+    
+    	System.out.println(f);
+  }
+}
