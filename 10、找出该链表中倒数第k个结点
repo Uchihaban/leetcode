@@ -1,0 +1,60 @@
+package leetcode;
+
+//输入一个链表，输出该链表中倒数第k个结点。
+//
+
+public class FindKthToTail{
+    public static ListNode findKthToTail(ListNode head,int k) {
+		
+    	if(head == null) {
+    		return head;
+    	}
+    	
+    	ListNode tmp = head;
+    	int i = 0;
+    	while(tmp!=null) {
+    		tmp=tmp.next;
+    		i++;
+    	}
+    	if(k>i) return null;
+    	
+    	ListNode p = head;
+    	ListNode q = head;
+    	while(q!=null&&k!=0) {
+    		q = q.next;
+    		k--;
+    	}
+
+    	while(q!=null) {
+    		q = q.next;
+    		p = p.next;
+    	}
+    	return p;
+    }
+    
+public static void main(String[] args) {
+    	
+
+    	ListNode head =new ListNode(0);
+    	ListNode node1 =new ListNode(1);
+    	ListNode node2 =new ListNode(2);
+    	ListNode node3 =new ListNode(3);
+    	ListNode node4 =new ListNode(0);
+    	
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	node3.setNext(node4);
+    
+    	ListNode l1 = head;
+    	while(l1!=null) {
+    		System.out.print(l1.getData()+"->");
+    		l1=l1.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+	
+    	ListNode h = findKthToTail(head,6);
+    
+    	System.out.println(h.getData());
+  }
+}
