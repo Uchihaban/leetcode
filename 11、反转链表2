@@ -1,0 +1,78 @@
+package leetcode;
+/*
+ * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+
+说明:
+1 ≤ m ≤ n ≤ 链表长度。
+
+示例:
+
+输入: 1->2->3->4->5->NULL, m = 2, n = 4
+输出: 1->4->3->2->5->NULL
+
+ */
+class ReverseBetween{
+  
+	public static ListNode reverseBetween(ListNode head, int m, int n) {
+	
+		
+    	if(head==null|| head.next == null || m >= n) {
+    		return head;
+    	}
+    	
+    	ListNode newNode = new ListNode(0);
+	    newNode.next = head;
+	    head = newNode;
+
+	    ListNode preNode = head;
+    	
+    	for (int i = 1; i < m; i++) {
+            preNode = preNode.next;
+        }
+    
+    	ListNode q = preNode.next;
+    	ListNode newq = q;
+    	ListNode newH= null;
+    	while(m<=n&&q!=null) {
+    		ListNode tmp =  q.next;
+    		q.next = newH;
+    		newH =  q;
+    		q = tmp;
+    		m++;	
+    	}
+    	preNode.next=newH;
+    	newq.next=q;
+    	return newNode.next;
+    	
+        
+    }
+public static void main(String[] args) {
+    	
+
+    	ListNode head =new ListNode(3);
+    	ListNode node1 =new ListNode(4);
+    	ListNode node2 =new ListNode(5);
+    	ListNode node3 =new ListNode(6);
+    	ListNode node4 =new ListNode(7);
+    	
+    	head.setNext(node1);
+    	node1.setNext(node2);
+    	node2.setNext(node3);
+    	node3.setNext(node4);
+    	
+    	ListNode l1 = head;
+    	while(l1!=null) {
+    		System.out.print(l1.getData()+"->");
+    		l1=l1.getNext();
+    	}
+    	System.out.print("\n-----------------------\n");
+	
+    	ListNode h = reverseBetween(head,2,4);
+    
+    	while(h!=null) {
+    		System.out.print(h.getData()+"->");
+    		h=h.getNext();
+    	}
+  }
+    
+}
